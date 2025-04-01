@@ -77,7 +77,7 @@ public class Start {
                     excluirLivro();
                     break;
                 case "4":
-                    //TODO Cadastrar Caderno
+                    cadastrarCaderno();
                     break;
                 case "5":
                     //TODO Consultar Caderno
@@ -140,6 +140,11 @@ public class Start {
         System.out.println("Digite o código do livro");
         String codigo = LeitoraDados.lerDado();
         produtoNegocio.excluir(codigo);
+    }
+
+    private static void cadastrarCaderno() {
+        Caderno caderno = LeitoraDados.lerCarderno();
+        produtoNegocio.salvar(caderno);
     }
 
     /**
