@@ -2,11 +2,14 @@ package one.digitalinovation.laboojava.console;
 
 import one.digitalinovation.laboojava.basedados.Banco;
 import one.digitalinovation.laboojava.entidade.*;
+import one.digitalinovation.laboojava.entidade.constantes.Materias;
 import one.digitalinovation.laboojava.negocio.ClienteNegocio;
 import one.digitalinovation.laboojava.negocio.PedidoNegocio;
 import one.digitalinovation.laboojava.negocio.ProdutoNegocio;
 import one.digitalinovation.laboojava.utilidade.LeitoraDados;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -80,6 +83,7 @@ public class Start {
                     cadastrarCaderno();
                     break;
                 case "5":
+                    consultarCaderno();
                     //TODO Consultar Caderno
                     break;
                 case "6":
@@ -145,6 +149,15 @@ public class Start {
     private static void cadastrarCaderno() {
         Caderno caderno = LeitoraDados.lerCarderno();
         produtoNegocio.salvar(caderno);
+    }
+
+    private static void consultarCaderno() {
+        System.out.println("Digite a quantidade de matérias (M2, M5 ou M10): ");
+        String materias = LeitoraDados.lerDado();
+        List<Produto> cadernos =
+                produtoNegocio.consultar(Materias.valueOf(materias.toUpperCase()))
+                        .orElse(new ArrayList<>());
+        System.out.println(cadernos);
     }
 
     /**

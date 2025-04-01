@@ -1,8 +1,12 @@
 package one.digitalinovation.laboojava.negocio;
 
 import one.digitalinovation.laboojava.basedados.Banco;
+import one.digitalinovation.laboojava.entidade.Caderno;
 import one.digitalinovation.laboojava.entidade.Produto;
+import one.digitalinovation.laboojava.entidade.constantes.Materias;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -83,6 +87,21 @@ public class ProdutoNegocio {
         }
 
         return Optional.empty();
+    }
+
+    public Optional<List<Produto>> consultar(Materias materias) {
+        List<Produto> cadernos = filtrarCadernosPorMaterias(materias);
+        return cadernos.isEmpty() ? Optional.empty() : Optional.of(cadernos);
+    }
+
+    private List<Produto> filtrarCadernosPorMaterias(Materias materias) {
+        List<Produto> cadernos = new ArrayList<>();
+        for (Produto produto : bancoDados.getProdutos()) {
+            if (produto instanceof Caderno && ((Caderno) produto).getMaterias() == materias) {
+                cadernos.add(produto);
+            }
+        }
+        return cadernos;
     }
 
     /**
