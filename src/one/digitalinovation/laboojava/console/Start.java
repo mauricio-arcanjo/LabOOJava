@@ -34,51 +34,59 @@ public class Start {
         String opcao = "";
 
         while(true) {
-
-            if (clienteLogado == null) {
-
-                System.out.println("Digite o cpf:");
-
-                String cpf = "";
-                cpf = LeitoraDados.lerDado();
-
-                identificarUsuario(cpf);
-            }
+//            if (clienteLogado == null) {
+//
+//                System.out.println("Digite o cpf:");
+//
+//                String cpf = "";
+//                cpf = LeitoraDados.lerDado();
+//
+//                identificarUsuario(cpf);
+//            }
 
             System.out.println("Selecione uma opção:");
             System.out.println("1 - Cadastrar Livro");
-            System.out.println("2 - Excluir Livro");
             //TODO Desafio: Consultar Livro(nome)
-            System.out.println("3 - Cadastrar Caderno");
-            System.out.println("4 - Excluir Caderno");
+            System.out.println("2 - Consultar Livro");
+            System.out.println("3 - Excluir Livro");
+            System.out.println("4 - Cadastrar Caderno");
             //TODO Desafio: Consultar Caderno(matéria)
-            System.out.println("5 - Fazer pedido");
-            System.out.println("6 - Excluir pedido");
+            System.out.println("5 - Consultar Caderno");
+            System.out.println("6 - Excluir Caderno");
+            System.out.println("7 - Fazer pedido");
             //TODO Desafio: Consultar Pedido(código)
-            System.out.println("7 - Listar produtos");
-            System.out.println("8 - Listar pedidos");
-            System.out.println("9 - Deslogar");
-            System.out.println("10 - Sair");
+            System.out.println("8 - Consultar Pedido");
+            System.out.println("9 - Excluir pedido");
+            System.out.println("10 - Listar produtos");
+            System.out.println("11 - Listar pedidos");
+            System.out.println("12 - Deslogar");
+            System.out.println("13 - Sair");
 
             opcao = LeitoraDados.lerDado();
 
+            Livro livro;
+            String codigo = "";
+            
             switch (opcao) {
                 case "1":
-                    Livro livro = LeitoraDados.lerLivro();
-                    produtoNegocio.salvar(livro);
+                    cadastrarLivro();
                     break;
                 case "2":
-                    System.out.println("Digite o código do livro");
-                    String codigoLivro = LeitoraDados.lerDado();
-                    produtoNegocio.excluir(codigoLivro);
+                    consultarLivro();
                     break;
                 case "3":
-                    //TODO Cadastrar Caderno
+                    excluirLivro();
                     break;
                 case "4":
-                    //TODO Excluir Caderno
+                    //TODO Cadastrar Caderno
                     break;
                 case "5":
+                    //TODO Consultar Caderno
+                    break;
+                case "6":
+                    //TODO Excluir Caderno
+                    break;
+                case "7":
                     Pedido pedido = LeitoraDados.lerPedido(banco);
                     Optional<Cupom> cupom = LeitoraDados.lerCupom(banco);
 
@@ -88,22 +96,25 @@ public class Start {
                         pedidoNegocio.salvar(pedido);
                     }
                     break;
-                case "6":
+                case "8":
+                    //TODO Consultar pedido
+                    break;
+                case "9":
                     System.out.println("Digite o código do pedido");
                     String codigoPedido = LeitoraDados.lerDado();
                     pedidoNegocio.excluir(codigoPedido);
                     break;
-                case "7":
+                case "10":
                     produtoNegocio.listarTodos();
                     break;
-                case "8":
+                case "11":
                     //TODO Listar todos os Pedidos
                     break;
-                case "9":
+                case "12":
                     System.out.println(String.format("Volte sempre %s!", clienteLogado.getNome()));
                     clienteLogado = null;
                     break;
-                case "10":
+                case "13":
                     System.out.println("Aplicação encerrada.");
                     System.exit(0);
                     break;
@@ -112,6 +123,24 @@ public class Start {
                     break;
             }
         }
+    }
+
+    private static void cadastrarLivro() {
+        Livro livro = LeitoraDados.lerLivro();
+        produtoNegocio.salvar(livro);
+    }
+
+    private static void consultarLivro() {
+        System.out.println("Digite o código do livro");
+        String codigo = LeitoraDados.lerDado();
+        Produto livroConsulta = produtoNegocio.consultar(codigo).get();
+        System.out.println(livroConsulta);
+    }
+
+    private static void excluirLivro() {
+        System.out.println("Digite o código do livro");
+        String codigo = LeitoraDados.lerDado();
+        produtoNegocio.excluir(codigo);
     }
 
     /**

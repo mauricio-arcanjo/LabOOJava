@@ -31,7 +31,7 @@ public class PedidoNegocio {
 
         double total = 0.0;
         for (Produto produto: produtos) {
-            total += produto.calcularFrete();
+//            total += produto.calcularFrete();
         }
 
         if (cupom != null) {
@@ -78,19 +78,19 @@ public class PedidoNegocio {
         for (int i = 0; i < bancoDados.getPedidos().length; i++) {
 
             Pedido pedido = bancoDados.getPedidos()[i];
-            if (pedido.getCodigo().equals(codigo)) {
-                pedidoExclusao = i;
-                break;
+//            if (pedido.getCodigo().equals(codigo)) {
+//                pedidoExclusao = i;
+//                break;
             }
         }
-
-        if (pedidoExclusao != -1) {
-            bancoDados.removerPedido(pedidoExclusao);
-            System.out.println("Pedido excluído com sucesso.");
-        } else {
-            System.out.println("Pedido inexistente.");
-        }
-    }
+//        if (pedidoExclusao != -1) {
+////            bancoDados.removerPedido(pedidoExclusao);
+////            System.out.println("Pedido excluído com sucesso.");
+////        } else {
+////            System.out.println("Pedido inexistente.");
+////
+//        }
+//    }
 
     /**
      * Lista todos os pedidos realizados.
