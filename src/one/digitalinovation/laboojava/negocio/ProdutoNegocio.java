@@ -54,7 +54,18 @@ public class ProdutoNegocio {
      * @param codigo Código de cadastro do produto
      */
     public void excluir(String codigo) {
-        //TODO Implementar a exclusão
+        boolean statusExclusao = false;
+        for (Produto produto: bancoDados.getProdutos()) {
+
+            if (produto.getCodigo().equalsIgnoreCase(codigo)) {
+                bancoDados.removerProduto(produto);
+                System.out.println("Produto excluído com sucesso!");
+                statusExclusao = true;
+            }
+        }
+        if (!statusExclusao){
+            System.out.println("Produto não encontrado!");
+        }
     }
 
     /**

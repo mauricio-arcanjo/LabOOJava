@@ -46,7 +46,6 @@ public class Start {
 
             System.out.println("Selecione uma opção:");
             System.out.println("1 - Cadastrar Livro");
-            //TODO Desafio: Consultar Livro(nome)
             System.out.println("2 - Consultar Livro");
             System.out.println("3 - Excluir Livro");
             System.out.println("4 - Cadastrar Caderno");

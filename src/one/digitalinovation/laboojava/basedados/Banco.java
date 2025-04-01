@@ -67,8 +67,8 @@ public class Banco {
         produtos.add(produto);
     }
 
-    public void removerProduto(int posicao) {
-        produtos.remove(posicao);
+    public void removerProduto(Produto produto) {
+        produtos.remove(produto);
     }
 
     public void adicionarPedido(Pedido pedido) {
