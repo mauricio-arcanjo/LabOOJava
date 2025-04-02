@@ -90,7 +90,7 @@ public class Start {
                     fazerPedido();
                     break;
                 case "8":
-                    //TODO Consultar pedido
+                    consultarPedido();
                     break;
                 case "9":
                     System.out.println("Digite o código do pedido");
@@ -159,6 +159,13 @@ public class Start {
         } else {
             pedidoNegocio.salvar(pedido);
         }
+    }
+
+    private static void consultarPedido() {
+        System.out.println("Digite o código do pedido");
+        String codigo = LeitoraDados.lerDado();
+        Pedido pedidoConsulta = pedidoNegocio.consultar(codigo).get();
+        System.out.println(pedidoConsulta);
     }
 
     /**
