@@ -43,23 +43,31 @@ public class ClienteNegocio {
      * Cadastra um novo cliente.
      * @param cliente Novo cliente que terá acesso a aplicação
      */
-    //TODO Fazer a inclusão de cliente
     public void cadastrar(Cliente cliente) {
 
-        for (Cliente c : bancoDados.getCliente()){
+        boolean clienteExistente = false;
+
+        for (Cliente c : bancoDados.getCliente()) {
             if (c.getCpf().equals(cliente.getCpf())) {
                 System.out.println("Cliente já cadastrado anteriormente!");
-                break;
-            } else{
-                bancoDados.adicionarCliente(cliente);
+                clienteExistente = true;
             }
         }
+        if (!clienteExistente) {
+            System.out.println("teste");
+            bancoDados.adicionarCliente(cliente);
+        }
     }
-
     /**
      * Exclui um cliente específico.
      * @param cpf CPF do cliente
      */
-    //TODO Fazer a exclusão de cliente
-
+    public void excluir(String cpf) {
+        for (Cliente c : bancoDados.getCliente()) {
+            if (c.getCpf().equals(cpf)) {
+                bancoDados.excluirCliente(c);
+                System.out.println("Cliente excluído com sucesso!");
+            }
+        }
+    }
 }

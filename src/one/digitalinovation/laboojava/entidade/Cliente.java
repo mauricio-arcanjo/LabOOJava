@@ -16,11 +16,6 @@ public class Cliente {
      */
     private String cpf;
 
-//    public Cliente() {
-//        this.nome = "Fulano";
-//        this.cpf = "123456789011";
-//    }
-
     public Cliente(String cpf, String nome) {
         this.cpf = cpf;
         this.nome = nome;

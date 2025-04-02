@@ -78,6 +78,10 @@ public class Banco {
 
     public void adicionarCliente(Cliente cliente) { clientes.add((cliente)); }
 
+    public void excluirCliente(Cliente cliente){
+        clientes.remove(cliente);
+    }
+
     public void removerPedido(int posicao) {
         pedidos.remove(posicao);
     }

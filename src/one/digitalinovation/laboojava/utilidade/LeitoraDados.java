@@ -137,5 +137,17 @@ public final class LeitoraDados {
 		return Optional.empty();
 	}
 
+	public static Cliente lerCliente() {
+		System.out.println("Cadastrando cliente...");
+
+		System.out.println("Digite o nome: ");
+		String nome = lerDado();
+
+		System.out.println("Digite o CPF: ");
+		String cpf = lerDado();
+
+        return new Cliente(cpf, nome);
+	}
+
 
 }

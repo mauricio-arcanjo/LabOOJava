@@ -60,13 +60,15 @@ public class Start {
             System.out.println("10 - Listar produtos");
             System.out.println("11 - Listar pedidos");
             System.out.println("12 - Deslogar");
-            System.out.println("13 - Sair");
+            System.out.println("13 - Cadastrar Cliente");
+            System.out.println("14 - Excluir Cliente");
+            System.out.println("15 - Sair");
 
             opcao = LeitoraDados.lerDado();
 
             Livro livro;
             String codigo = "";
-            
+
             switch (opcao) {
                 case "1":
                     cadastrarLivro();
@@ -93,9 +95,7 @@ public class Start {
                     consultarPedido();
                     break;
                 case "9":
-                    System.out.println("Digite o código do pedido");
-                    String codigoPedido = LeitoraDados.lerDado();
-                    pedidoNegocio.excluir(codigoPedido);
+                    excluirPedido();
                     break;
                 case "10":
                     produtoNegocio.listarTodos();
@@ -104,10 +104,16 @@ public class Start {
                     pedidoNegocio.listarTodos();
                     break;
                 case "12":
-                    System.out.println(String.format("Volte sempre %s!", clienteLogado.getNome()));
-                    clienteLogado = null;
+                    deslogar();
                     break;
                 case "13":
+                    cadastrarCliente();
+                    break;
+                case "14":
+                    excluirCliente();
+                    break;
+
+                case "15":
                     System.out.println("Aplicação encerrada.");
                     System.exit(0);
                     break;
@@ -166,6 +172,30 @@ public class Start {
         String codigo = LeitoraDados.lerDado();
         Pedido pedidoConsulta = pedidoNegocio.consultar(codigo).get();
         System.out.println(pedidoConsulta);
+    }
+
+    private static void excluirPedido() {
+        System.out.println("Digite o código do pedido");
+        String codigoPedido = LeitoraDados.lerDado();
+        pedidoNegocio.excluir(codigoPedido);
+    }
+
+    private static void deslogar() {
+        System.out.println(String.format("Volte sempre %s!", clienteLogado.getNome()));
+        clienteLogado = null;
+    }
+
+    private static void cadastrarCliente() {
+        Cliente cliente = LeitoraDados.lerCliente();
+        clienteNegocio.cadastrar(cliente);
+//        banco.adicionarCliente(cliente);
+    }
+
+    private static void excluirCliente() {
+        System.out.println("Digite o CPF: ");
+        String cpf = LeitoraDados.lerDado();
+        clienteNegocio.excluir(cpf);
+        clienteLogado = null;
     }
 
     /**
