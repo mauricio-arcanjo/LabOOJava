@@ -37,15 +37,15 @@ public class Start {
         String opcao = "";
 
         while(true) {
-//            if (clienteLogado == null) {
-//
-//                System.out.println("Digite o cpf:");
-//
-//                String cpf = "";
-//                cpf = LeitoraDados.lerDado();
-//
-//                identificarUsuario(cpf);
-//            }
+            if (clienteLogado == null) {
+
+                System.out.println("Digite o cpf:");
+
+                String cpf = "";
+                cpf = LeitoraDados.lerDado();
+
+                identificarUsuario(cpf);
+            }
 
             System.out.println("Selecione uma opção:");
             System.out.println("1 - Cadastrar Livro");
@@ -151,7 +151,7 @@ public class Start {
     }
 
     private static void fazerPedido() {
-        Pedido pedido = LeitoraDados.lerPedido(banco);
+        Pedido pedido = LeitoraDados.lerPedido(banco, clienteLogado);
         Optional<Cupom> cupom = LeitoraDados.lerCupom(banco);
 
         if (cupom.isPresent()) {

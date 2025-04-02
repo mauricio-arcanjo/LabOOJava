@@ -31,11 +31,12 @@ public class ClienteNegocio {
      */
     public Optional<Cliente> consultar(String cpf) {
 
-        if (bancoDados.getCliente().getCpf().equals(cpf)) {
-            return Optional.of(bancoDados.getCliente());
-        } else {
-            return Optional.empty();
+        for (Cliente c : bancoDados.getCliente()){
+            if (c.getCpf().equals(cpf)) {
+                return Optional.of(c);
+            }
         }
+        return Optional.empty();
     }
 
     /**
@@ -43,6 +44,17 @@ public class ClienteNegocio {
      * @param cliente Novo cliente que terá acesso a aplicação
      */
     //TODO Fazer a inclusão de cliente
+    public void cadastrar(Cliente cliente) {
+
+        for (Cliente c : bancoDados.getCliente()){
+            if (c.getCpf().equals(cliente.getCpf())) {
+                System.out.println("Cliente já cadastrado anteriormente!");
+                break;
+            } else{
+                bancoDados.adicionarCliente(cliente);
+            }
+        }
+    }
 
     /**
      * Exclui um cliente específico.

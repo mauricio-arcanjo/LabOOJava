@@ -62,7 +62,7 @@ public class PedidoNegocio {
         codigo = String.format(codigo, bancoDados.getPedidos().length);
 
         novoPedido.setCodigo(codigo);
-        novoPedido.setCliente(bancoDados.getCliente());
+        novoPedido.setCliente(novoPedido.getCliente());
         novoPedido.setData(LocalDateTime.now());
         novoPedido.setTotal(calcularTotal(novoPedido.getProdutos(), cupom));
         System.out.println(novoPedido);

@@ -82,12 +82,13 @@ public final class LeitoraDados {
 	 * Ler os dados do pedido e retorna um objeto a partir destes.
 	 * @return Um pedido a partir dos dados de entrada
 	 */
-	public static Pedido lerPedido(Banco banco) {
+	public static Pedido lerPedido(Banco banco, Cliente cliente) {
 
 		ProdutoNegocio produtoNegocio = new ProdutoNegocio(banco);
 
 		System.out.println("Cadastrando pedido...");
 		Pedido pedido = new Pedido();
+		pedido.setCliente(cliente);
 
 		String opcao = "s";
 		do {
