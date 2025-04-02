@@ -33,15 +33,13 @@ public class PedidoNegocio {
         double total = 0.0;
         for (Produto produto: produtos) {
             total += produto.calcularFrete();
-            System.out.println(total);
         }
 
         if (cupom != null) {
-            return  total * (1 - cupom.getDesconto());
+            return  total * (1 - cupom.getDesconto()/100);
         } else {
             return  total;
         }
-
     }
 
     /**
@@ -59,7 +57,6 @@ public class PedidoNegocio {
      */
     public void salvar(Pedido novoPedido, Cupom cupom) {
 
-        //TODO
         String codigo = "PD%04d";
         codigo = String.format(codigo, bancoDados.getPedidos().length);
 
@@ -67,18 +64,10 @@ public class PedidoNegocio {
         novoPedido.setCliente(bancoDados.getCliente());
         novoPedido.setData(LocalDateTime.now());
         novoPedido.setTotal(calcularTotal(novoPedido.getProdutos(), cupom));
-
+        System.out.println(novoPedido);
         bancoDados.adicionarPedido(novoPedido);
         System.out.println("Pedido criado com sucesso!");
-        //Definir padrão código
-        //Pegar data do dia corrente
-        //Formatar código
 
-        //Setar código no pedido
-        //Setar cliente no pedido
-        //Calcular e set total
-        //Adicionar no banco
-        //Mensagem
     }
 
     /**

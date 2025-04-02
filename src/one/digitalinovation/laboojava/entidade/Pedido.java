@@ -72,10 +72,4 @@ public class Pedido {
                 '}';
     }
 
-    //TODO Preencher esta classe
-
-    //codigo
-    //cliente
-    //produtos
-    //total
 }
