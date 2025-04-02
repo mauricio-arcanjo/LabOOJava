@@ -104,7 +104,8 @@ public final class LeitoraDados {
 				String quantidade = lerDado();
 				produto.setQuantidade(Integer.parseInt(quantidade));
 
-//				pedido.getProdutos().add(produto);
+				pedido.adicionar(produto);
+
 			} else {
 				System.out.println("Produto inexistente. Escolha um produto válido");
 			}

@@ -37,9 +37,11 @@ public class Livro extends Produto {
     /**
      * {@inheritDoc}.
      */
-//    @Override
+    @Override
     public double calcularFrete() {
+
         return (getPreco() * getQuantidade()) * (1 + genero.getFator());
+
     }
 
     @Override
@@ -49,6 +51,8 @@ public class Livro extends Produto {
                 ", genero=" + genero + '\'' +
                 ", codigo='" + getCodigo() + '\'' +
                 ", preço='" + getPreco() + '\'' +
+                ", quantidade='" + getQuantidade() + '\'' +
                 '}';
     }
+
 }

@@ -52,11 +52,9 @@ public class Start {
             System.out.println("2 - Consultar Livro");
             System.out.println("3 - Excluir Livro");
             System.out.println("4 - Cadastrar Caderno");
-            //TODO Desafio: Consultar Caderno(matéria)
             System.out.println("5 - Consultar Caderno");
             System.out.println("6 - Excluir Caderno");
             System.out.println("7 - Fazer pedido");
-            //TODO Desafio: Consultar Pedido(código)
             System.out.println("8 - Consultar Pedido");
             System.out.println("9 - Excluir pedido");
             System.out.println("10 - Listar produtos");
@@ -77,27 +75,19 @@ public class Start {
                     consultarLivro();
                     break;
                 case "3":
-                    excluirLivro();
+                    excluirProduto();
                     break;
                 case "4":
                     cadastrarCaderno();
                     break;
                 case "5":
                     consultarCaderno();
-                    //TODO Consultar Caderno
                     break;
                 case "6":
-                    //TODO Excluir Caderno
+                    excluirProduto();
                     break;
                 case "7":
-                    Pedido pedido = LeitoraDados.lerPedido(banco);
-                    Optional<Cupom> cupom = LeitoraDados.lerCupom(banco);
-
-                    if (cupom.isPresent()) {
-                        pedidoNegocio.salvar(pedido, cupom.get());
-                    } else {
-                        pedidoNegocio.salvar(pedido);
-                    }
+                    fazerPedido();
                     break;
                 case "8":
                     //TODO Consultar pedido
@@ -111,7 +101,7 @@ public class Start {
                     produtoNegocio.listarTodos();
                     break;
                 case "11":
-                    //TODO Listar todos os Pedidos
+                    pedidoNegocio.listarTodos();
                     break;
                 case "12":
                     System.out.println(String.format("Volte sempre %s!", clienteLogado.getNome()));
@@ -140,8 +130,8 @@ public class Start {
         System.out.println(livroConsulta);
     }
 
-    private static void excluirLivro() {
-        System.out.println("Digite o código do livro");
+    private static void excluirProduto() {
+        System.out.println("Digite o código do produto");
         String codigo = LeitoraDados.lerDado();
         produtoNegocio.excluir(codigo);
     }
@@ -158,6 +148,17 @@ public class Start {
                 produtoNegocio.consultar(Materias.valueOf(materias.toUpperCase()))
                         .orElse(new ArrayList<>());
         System.out.println(cadernos);
+    }
+
+    private static void fazerPedido() {
+        Pedido pedido = LeitoraDados.lerPedido(banco);
+        Optional<Cupom> cupom = LeitoraDados.lerCupom(banco);
+
+        if (cupom.isPresent()) {
+            pedidoNegocio.salvar(pedido, cupom.get());
+        } else {
+            pedidoNegocio.salvar(pedido);
+        }
     }
 
     /**

@@ -9,6 +9,11 @@ public class Caderno extends Produto {
     public Caderno() {
     }
 
+    @Override
+    public double calcularFrete() {
+        return (getPreco() * getQuantidade()) + (materias.getFator());
+    }
+
     public Caderno(Materias materias) {
         this.materias = materias;
     }
@@ -28,6 +33,7 @@ public class Caderno extends Produto {
                 "materias=" + materias +
                 ", codigo='" + getCodigo() + '\'' +
                 ", preço='" + getPreco() + '\'' +
+                ", quantidade='" + getQuantidade() + '\'' +
                 '}';
     }
 }

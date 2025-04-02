@@ -6,6 +6,7 @@ import one.digitalinovation.laboojava.entidade.Pedido;
 import one.digitalinovation.laboojava.entidade.Produto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -31,7 +32,8 @@ public class PedidoNegocio {
 
         double total = 0.0;
         for (Produto produto: produtos) {
-//            total += produto.calcularFrete();
+            total += produto.calcularFrete();
+            System.out.println(total);
         }
 
         if (cupom != null) {
@@ -57,6 +59,17 @@ public class PedidoNegocio {
      */
     public void salvar(Pedido novoPedido, Cupom cupom) {
 
+        //TODO
+        String codigo = "PD%04d";
+        codigo = String.format(codigo, bancoDados.getPedidos().length);
+
+        novoPedido.setCodigo(codigo);
+        novoPedido.setCliente(bancoDados.getCliente());
+        novoPedido.setData(LocalDateTime.now());
+        novoPedido.setTotal(calcularTotal(novoPedido.getProdutos(), cupom));
+
+        bancoDados.adicionarPedido(novoPedido);
+        System.out.println("Pedido criado com sucesso!");
         //Definir padrão código
         //Pegar data do dia corrente
         //Formatar código
@@ -95,6 +108,15 @@ public class PedidoNegocio {
     /**
      * Lista todos os pedidos realizados.
      */
-    //TODO Método de listar todos os pedidos
+    public void listarTodos() {
 
+        if (bancoDados.getPedidos().length == 0) {
+            System.out.println("Não existem pedidos cadastrados");
+        } else {
+
+            for (Pedido pedido: bancoDados.getPedidos()) {
+                System.out.println(pedido.toString());
+            }
+        }
+    }
 }
